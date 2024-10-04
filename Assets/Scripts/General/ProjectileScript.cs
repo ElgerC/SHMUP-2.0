@@ -15,6 +15,7 @@ public abstract class ProjectileScript : MonoBehaviour
     private void Start()
     {
         _rb.velocity = new Vector2(speedX,speedY);
+        Destroy(gameObject, 5);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
