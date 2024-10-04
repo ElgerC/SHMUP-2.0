@@ -444,6 +444,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4819445462286084017, guid: 1861d2bc91c0fc94b9717dad13a0079f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2514445796280603661}
+    - targetCorrespondingSourceObject: {fileID: 4819445462286084017, guid: 1861d2bc91c0fc94b9717dad13a0079f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2514445796280603662}
   m_SourcePrefab: {fileID: 100100000, guid: 1861d2bc91c0fc94b9717dad13a0079f, type: 3}
 --- !u!1 &2514445796280603655 stripped
 GameObject:
@@ -507,7 +510,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2514445796280603658}
         m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
         m_MethodName: Fire
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -523,7 +526,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2514445796280603658}
         m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
         m_MethodName: Movement
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -554,7 +557,7 @@ MonoBehaviour:
   rb: {fileID: 2514445796280603656}
   moveSpeed: 2.3
   bullet: {fileID: 5269081503901300651, guid: 2868cf8eeb0f37f40bef25f33fb11514, type: 3}
-  move: {fileID: 6485917130954092485, guid: e305c7b45e0f4b3448e150752cf423e0, type: 3}
+  canFire: 0
 --- !u!61 &2514445796280603661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -600,6 +603,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3338515, y: 0.312837}
   m_EdgeRadius: 0
+--- !u!114 &2514445796280603662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514445796280603655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5195e7397550d419b2fae10cb2c23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

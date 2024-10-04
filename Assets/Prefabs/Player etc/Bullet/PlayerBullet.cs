@@ -6,6 +6,6 @@ public class PlayerBullet : ProjectileScript
 {
     protected override void OnHit()
     {
-        Debug.Log("hit");
+        
     }
 }

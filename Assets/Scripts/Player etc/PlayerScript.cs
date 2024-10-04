@@ -9,15 +9,16 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed;
     private Vector2 _moveDirection;
     [SerializeField] GameObject bullet;
+    [SerializeField] bool canFire = false;
 
-    public InputActionReference move;
-    public void Movement()
+    public void Movement(InputAction.CallbackContext ctx)
     {
-        _moveDirection = move.action.ReadValue<Vector2>();
-        rb.velocity = new Vector2(_moveDirection.x*moveSpeed, 0); 
+        _moveDirection = ctx.action.ReadValue<Vector2>();
+        rb.velocity = new Vector2(_moveDirection.x * moveSpeed, 0);
     }
-    public void Fire()
+    public void Fire(InputAction.CallbackContext ctx)
     {
-        Instantiate(bullet,new Vector2(transform.position.x,transform.position.y),Quaternion.identity);
+        if(ctx.performed)
+            Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
     }
 }
