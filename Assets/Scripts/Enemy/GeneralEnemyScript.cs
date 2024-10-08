@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GeneralEnemyScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GeneralEnemyScript : MonoBehaviour
 
     public states state;
     [SerializeField] Vector2 nextPos;
+    [SerializeField] float health;
 
     private void Awake()
     {
@@ -34,5 +36,11 @@ public class GeneralEnemyScript : MonoBehaviour
                 break;
             default: break;
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        health -= 1;
+        if (health <= 0)
+            Destroy(gameObject);
     }
 }
