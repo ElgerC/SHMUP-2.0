@@ -3,44 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GeneralEnemyScript : MonoBehaviour
+public abstract class GeneralEnemyScript : MonoBehaviour
 {
-    public enum states
+    public enum States
     {
         spawning,
         moving,
         dying,
     }
 
-    public states state;
-    [SerializeField] Vector2 nextPos;
+    public States state;
     [SerializeField] float health;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        state = states.spawning;
+        state = States.spawning;
     }
-    public void spawned()
+    public void Spawned()
     {
-        state = states.moving;
+        state = States.moving;
     }
 
-    private void Update()
-    {
-        switch (state)
-        {
-            case states.moving:
-                    
-                break;
-            case states.dying:
-                break;
-            default: break;
-        }
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         health -= 1;
         if (health <= 0)
-            Destroy(gameObject);
+            Death();
+    }
+    protected virtual void Death()
+    {
+        state = States.dying;
+        Destroy(gameObject);
     }
 }
