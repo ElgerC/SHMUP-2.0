@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy2 : GeneralEnemyScript
@@ -9,14 +10,6 @@ public class Enemy2 : GeneralEnemyScript
     private bool isMoving = false; 
     private void Update()
     {
-        if(state == States.moving && !isMoving)
-        {
-            isMoving = true;
-            StartCoroutine(Movement());
-        }
-        IEnumerator Movement()
-        {
-            yield return new WaitForSeconds(1);
-        }
+        transform.position = Vector2.Lerp(transform.position,endPos,0.05f);
     }
 }

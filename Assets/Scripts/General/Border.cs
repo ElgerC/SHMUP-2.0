@@ -7,25 +7,27 @@ public class Border : MonoBehaviour
 
     private float leftBorder;
     private float rightBorder;
-    private float topBorder;
-    private float bottomBorder;
+    [SerializeField] float offSet;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
         leftBorder = lowerLeft.x;
         rightBorder = upperRight.x;
-        bottomBorder = lowerLeft.y;
-        topBorder = upperRight.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, leftBorder, rightBorder), Mathf.Clamp(transform.position.y, bottomBorder, topBorder));
+        if (transform.position.x < leftBorder-offSet)
+        {
+            transform.position = new Vector2(rightBorder+offSet-0.05f, transform.position.y);
+        } else if(transform.position.x > rightBorder+offSet)
+        { transform.position = new Vector2(leftBorder-offSet+0.05f, transform.position.y); }
+            
 
     }
 }

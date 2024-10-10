@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy1 : GeneralEnemyScript
@@ -24,7 +26,9 @@ public class Enemy1 : GeneralEnemyScript
             case States.moving:
                 if (canSht)
                 {
-                    Instantiate(bullet,transform.position,Quaternion.Euler(0,0,180));
+                    float projectiles = 1 + Mathf.Round(0);
+                    for (int i = 0; i < projectiles; i++)
+                        Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
                     StartCoroutine(Shooting());
                 }
                 break;

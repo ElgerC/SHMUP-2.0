@@ -461,7 +461,7 @@ MonoBehaviour:
   state: 0
   health: 0
   startPos: {x: 5, y: 0}
-  endPos: {x: -2, y: 0}
+  endPos: {x: 9, y: 0}
 --- !u!4 &858042807
 Transform:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ Transform:
   m_GameObject: {fileID: 858042805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.95643544, y: 1.6167493, z: -0.011529263}
+  m_LocalPosition: {x: 1.94, y: 0, z: -0.011529263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -493,7 +493,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1584,6 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5195e7397550d419b2fae10cb2c23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offSet: 0.84
 --- !u!1001 &3453336841460525956
 PrefabInstance:
   m_ObjectHideFlags: 0

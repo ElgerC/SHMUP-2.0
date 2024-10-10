@@ -19,6 +19,10 @@ public class PlayerScript : MonoBehaviour
     //Health variables
     [SerializeField] float health;
 
+    private void Awake()
+    {
+        rb = GetComponentInChildren<Rigidbody2D>();
+    }
     //Movement
     public void Movement(InputAction.CallbackContext ctx)
     {
