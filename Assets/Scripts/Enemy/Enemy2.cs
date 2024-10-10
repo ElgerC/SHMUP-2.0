@@ -6,10 +6,39 @@ using UnityEngine;
 public class Enemy2 : GeneralEnemyScript
 {
     [SerializeField] Vector2 startPos;
-    [SerializeField] Vector2 endPos;
-    private bool isMoving = false; 
+    private bool isMovingDown = true;
+    public bool canMoveDown;
+    Rigidbody2D rb;
+    [SerializeField] float Speed;
+    Vector3 direction;
+    float rightBorder;
+    float leftBorder;
+
+    protected override void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        base.Awake();
+        direction = new Vector2(transform.rotation.z, 0);
+        rightBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0)).x;
+        leftBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1)).x;
+    }
+    private void Start()
+    {
+        rb.velocity = -direction.normalized * Speed;
+    }
     private void Update()
     {
-        transform.position = Vector2.Lerp(transform.position,endPos,0.05f);
+        if(canMoveDown)
+        {
+            if (isMovingDown && transform.position.x >= rightBorder)
+            {
+                isMovingDown = false;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1);
+            }
+            else if (!isMovingDown && transform.position.x <= leftBorder)
+            {
+                isMovingDown = true;
+            }
+        }        
     }
 }
