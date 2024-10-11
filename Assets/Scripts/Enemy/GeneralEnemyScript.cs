@@ -52,10 +52,10 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     }
     IEnumerator movingToStartDes()
     {
-        while (Vector3.Distance(transform.position,StartPos)<0.2)
+        while(Vector3.Distance(transform.position,StartPos)>0.2f)
         {
-            transform.position = Vector3.Lerp(transform.position, StartPos, 0.1f);
-            yield return new WaitForSeconds(0.1f);
+            transform.position = Vector3.Lerp(transform.position, StartPos, 0.05f);
+            yield return new WaitForSeconds(0.05f);
         }
         state = States.moving;
     }

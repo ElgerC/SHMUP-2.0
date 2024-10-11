@@ -32,8 +32,9 @@ public class PlayerScript : MonoBehaviour
     //Shooting
     public void Fire(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed)
-            Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        if (ctx.performed)
+            if (Time.timeScale >= 1)
+                Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
