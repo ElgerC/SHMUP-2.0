@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Enemy2 : GeneralEnemyScript
 {
-    [SerializeField] Vector2 startPos;
     private bool isMovingDown = true;
     public bool canMoveDown;
     Rigidbody2D rb;
@@ -22,23 +21,24 @@ public class Enemy2 : GeneralEnemyScript
         rightBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0)).x;
         leftBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1)).x;
     }
-    private void Start()
+    protected override void Update()
     {
-        rb.velocity = -direction.normalized * Speed;
-    }
-    private void Update()
-    {
-        if(canMoveDown)
+        base.Update();
+        if(state == States.moving)
         {
-            if (isMovingDown && transform.position.x >= rightBorder)
+            rb.velocity = -direction.normalized * Speed;
+            if (canMoveDown)
             {
-                isMovingDown = false;
-                transform.position = new Vector3(transform.position.x, transform.position.y - 1);
+                if (isMovingDown && transform.position.x >= rightBorder)
+                {
+                    isMovingDown = false;
+                    transform.position = new Vector3(transform.position.x, transform.position.y - 1);
+                }
+                else if (!isMovingDown && transform.position.x <= leftBorder)
+                {
+                    isMovingDown = true;
+                }
             }
-            else if (!isMovingDown && transform.position.x <= leftBorder)
-            {
-                isMovingDown = true;
-            }
-        }        
+        }           
     }
 }

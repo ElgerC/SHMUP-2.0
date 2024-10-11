@@ -19,10 +19,13 @@ public class Enemy1 : GeneralEnemyScript
         animator = GetComponent<Animator>();
         base.Awake();
     }
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         switch (state)
         {
+            case States.spawning:
+                break;
             case States.moving:
                 if (canSht)
                 {
