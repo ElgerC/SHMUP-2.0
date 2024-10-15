@@ -17,6 +17,10 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     [SerializeField] float health;
     public Vector3 StartPos;
     private bool movingToStart = false;
+    protected bool canSht = true;
+    [SerializeField] float delay;
+    [SerializeField] protected GameObject bullet;
+
 
     protected virtual void Awake()
     {
@@ -28,17 +32,26 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (state == States.spawning)
+        switch (state)
         {
-            if(!movingToStart)
-            {
-                StartCoroutine(movingToStartDes());
-                movingToStart = true;
-            }
-            return;
+            case States.spawning:
+                if (!movingToStart)
+                {
+                    StartCoroutine(movingToStartDes());
+                    movingToStart = true;
+                }
+                break;
+            case States.moving:
+                Movement();
+                break;
+            case States.dying:
+                break;
         }
     }
+    protected virtual void Movement()
+    {
 
+    } 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         health -= 1;
@@ -52,11 +65,27 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     }
     IEnumerator movingToStartDes()
     {
-        while(Vector3.Distance(transform.position,StartPos)>0.2f)
+        while (Vector3.Distance(transform.position, StartPos) > 0.2f)
         {
             transform.position = Vector3.Lerp(transform.position, StartPos, 0.05f);
             yield return new WaitForSeconds(0.05f);
         }
         state = States.moving;
+    }
+    protected virtual void Shoot()
+    {
+        if (canSht)
+        {
+            float projectiles = 1 + Mathf.Round(0);
+            for (int i = 0; i < projectiles; i++)
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
+            StartCoroutine(Shooting());
+        }
+    }
+    protected virtual IEnumerator Shooting()
+    {
+        canSht = false;
+        yield return new WaitForSeconds(delay);
+        canSht = true;
     }
 }

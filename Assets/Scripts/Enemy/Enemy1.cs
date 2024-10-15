@@ -7,11 +7,6 @@ using UnityEngine;
 
 public class Enemy1 : GeneralEnemyScript
 {
-    //Shooting variables
-    [SerializeField] float delay;
-    bool canSht = true;
-    [SerializeField] GameObject bullet;
-
     //animation
     Animator animator;
     protected override void Awake()
@@ -19,32 +14,10 @@ public class Enemy1 : GeneralEnemyScript
         animator = GetComponent<Animator>();
         base.Awake();
     }
-    protected override void Update()
+
+    protected override void Movement()
     {
-        base.Update();
-        switch (state)
-        {
-            case States.spawning:
-                break;
-            case States.moving:
-                if (canSht)
-                {
-                    float projectiles = 1 + Mathf.Round(0);
-                    for (int i = 0; i < projectiles; i++)
-                        Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
-                    StartCoroutine(Shooting());
-                }
-                break;
-            case States.dying:
-                break;
-            default: break;
-        }
-    }
-    IEnumerator Shooting()
-    {
-        canSht = false;
-        yield return new WaitForSeconds(delay);
-        canSht = true;
+        Shoot();
     }
     protected override void Death()
     {
