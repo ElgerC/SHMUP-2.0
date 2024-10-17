@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
@@ -40,5 +41,10 @@ public class PauseScript : MonoBehaviour
             obj.SetActive(false);
         else
             obj.SetActive(true);
+    }
+    public void ExitBut()
+    {
+        UnPause();
+        SceneManager.LoadScene("StartScene");
     }
 }
