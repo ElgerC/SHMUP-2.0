@@ -15,7 +15,8 @@ public abstract class GeneralEnemyScript : MonoBehaviour
 
     public States state;
     [SerializeField] float health;
-    public Vector3 StartPos;
+    private Vector3 StartPos;
+    public Vector3 EndPos;
     private bool movingToStart = false;
     protected bool canSht = true;
     [SerializeField] float delay;
@@ -25,6 +26,7 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     protected virtual void Awake()
     {
         state = States.spawning;
+        StartPos = transform.position;
     }
     public void Spawned()
     {
@@ -65,11 +67,12 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     }
     IEnumerator movingToStartDes()
     {
-        while (Vector3.Distance(transform.position, StartPos) > 0.2f)
+        while (Vector3.Distance(transform.position, EndPos) > 0.05f)
         {
-            transform.position = Vector3.Lerp(transform.position, StartPos, 0.05f);
+            transform.position = Vector3.Lerp(transform.position, EndPos, 0.1f);
             yield return new WaitForSeconds(0.05f);
         }
+        transform.position = EndPos;
         state = States.moving;
     }
     protected virtual void Shoot()

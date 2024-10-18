@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3465596003160246598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.62, y: 6.72, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   health: 3
-  StartPos: {x: 9, y: 4, z: 0}
+  StartPos: {x: 0, y: 0, z: 0}
   delay: 4
   bullet: {fileID: 6266703392661441304, guid: 274b2511cb931b841b45b2192620749a, type: 3}
   canMoveDown: 0
