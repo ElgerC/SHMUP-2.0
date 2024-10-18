@@ -47,10 +47,13 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnGroup(float curDelay)
     {
-        SpawnSpcfEnemy(waves[curWaveC - 1].rounds[curRoundC].enemy1C, Enemy1);
-        SpawnSpcfEnemy(waves[curWaveC - 1].rounds[curRoundC].enemy2C, Enemy2);
-        SpawnSpcfEnemy(waves[curWaveC - 1].rounds[curRoundC].enemy3C, Enemy3);
-
+        Rounds curRound = waves[curWaveC - 1].rounds[curRoundC-1];
+        SpawnSpcfEnemy(curRound.enemy1C, Enemy1);
+        SpawnSpcfEnemy(curRound.enemy2C, Enemy2);
+        SpawnSpcfEnemy(curRound.enemy3C, Enemy3);
+        
+        if (curRound.boss)
+            SpawnSpcfEnemy(1, Boss);
         yield return new WaitForSeconds(curDelay);
     }
 
@@ -61,6 +64,7 @@ public class WaveManager : MonoBehaviour
             Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }
+
 
 
 }

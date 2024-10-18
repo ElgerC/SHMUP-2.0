@@ -10,6 +10,7 @@ public class Enemy2 : GeneralEnemyScript
     Rigidbody2D rb;
     [SerializeField] float Speed;
     Vector3 direction;
+    Vector3 startDirection;
     float rightBorder;
     float leftBorder;
 
@@ -17,9 +18,18 @@ public class Enemy2 : GeneralEnemyScript
     {
         rb = GetComponent<Rigidbody2D>();
         base.Awake();
-        direction = new Vector2(transform.rotation.z, 0);
+        
         rightBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0)).x;
         leftBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1)).x;
+    }
+    private void Start()
+    {      
+        while(startDirection.z == 0)
+        {
+            startDirection = new Vector3(0, 0, Random.Range(-2000, 2000)).normalized;
+        }
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,startDirection.z*90));
+        direction = new Vector2(transform.rotation.z, 0);
     }
     protected override void Movement()
     {

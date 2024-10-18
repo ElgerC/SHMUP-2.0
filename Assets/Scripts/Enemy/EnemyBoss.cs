@@ -14,6 +14,8 @@ public class EnemyBoss : GeneralEnemyScript
     [SerializeField] float offset;
 
     [SerializeField] private List<GameObject> bullets;
+
+    bool hasStart = false;
     protected override void Awake()
     {
         base.Awake();
@@ -23,11 +25,6 @@ public class EnemyBoss : GeneralEnemyScript
         leftBorder = lowerLeft.x;
         rightBorder = upperRight.x;
         rb = GetComponent<Rigidbody2D>();
-    }
-    private void Start()
-    {
-
-        ChangeDirection(StrtDirect);
     }
     protected override void Update()
     {
@@ -46,7 +43,11 @@ public class EnemyBoss : GeneralEnemyScript
     }
     protected override void Movement()
     {
-        
+        if (!hasStart)
+        {
+            ChangeDirection(StrtDirect);
+            hasStart = true;
+        }
         if (canSht)
         {
             if (bullet == bullets[0])
