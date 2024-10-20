@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3472656251896490569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.271185, y: 0.37931398, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   health: 3
-  StartPos: {x: 0, y: 1, z: 0}
+  EndPos: {x: -4.4091043, y: 4, z: 0}
   delay: 3
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
+  drops:
+  - {fileID: 0}
 --- !u!95 &2775804432787611636
 Animator:
   serializedVersion: 5

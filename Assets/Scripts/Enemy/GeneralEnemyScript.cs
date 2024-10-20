@@ -22,6 +22,8 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     [SerializeField] float delay;
     [SerializeField] protected GameObject bullet;
 
+    public List<GameObject> drops;
+
 
     protected virtual void Awake()
     {
@@ -90,5 +92,10 @@ public abstract class GeneralEnemyScript : MonoBehaviour
         canSht = false;
         yield return new WaitForSeconds(delay);
         canSht = true;
+    }
+    private void OnDestroy()
+    {
+        if (Random.Range(0f, 100f) > 20)
+            Instantiate(drops[Random.Range(0, drops.Count - 1)],transform.position,Quaternion.identity);
     }
 }
