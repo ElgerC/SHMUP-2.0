@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class GeneralEnemyScript : MonoBehaviour
+public abstract class GeneralEnemyScript : M_SceneObject
 {
     public enum States
     {
@@ -25,8 +25,9 @@ public abstract class GeneralEnemyScript : MonoBehaviour
     public List<GameObject> drops;
 
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         state = States.spawning;
         StartPos = transform.position;
     }
@@ -93,9 +94,9 @@ public abstract class GeneralEnemyScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         canSht = true;
     }
-    private void OnDestroy()
-    {
-        if (Random.Range(0f, 100f) > 20)
-            Instantiate(drops[Random.Range(0, drops.Count - 1)],transform.position,Quaternion.identity);
-    }
+    //private void OnDestroy()
+    //{
+    //    if (Random.Range(0f, 100f) > 20)
+    //        Instantiate(drops[Random.Range(0, drops.Count)],transform.position,Quaternion.identity);
+    //}
 }

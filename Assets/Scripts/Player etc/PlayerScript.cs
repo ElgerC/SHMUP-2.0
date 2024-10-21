@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : M_SceneObject
 {
     //General variables
     public Rigidbody2D rb;
