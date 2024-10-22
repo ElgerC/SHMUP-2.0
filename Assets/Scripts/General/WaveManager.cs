@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class WaveManager : MonoBehaviour
     public class Waves
     {
         public Rounds[] rounds;
+        public int AmountRounds;
     }
 
     [System.Serializable]
@@ -27,6 +30,7 @@ public class WaveManager : MonoBehaviour
 
     public int curWaveC = 1;
     public int curRoundC = 1;
+    private bool waveActive = false;
     public int enemyC;
 
     [SerializeField] private GameObject Enemy1;
@@ -40,22 +44,34 @@ public class WaveManager : MonoBehaviour
         if (instance == null)
             instance = this;
     }
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(SpawnGroup(delay));
+        if (enemyC == 0 && !waveActive)
+        {
+            curWaveC++;
+            curRoundC = 1;
+            StartCoroutine(SpawnGroup(delay));
+            waveActive = true;
+        }
     }
-
     IEnumerator SpawnGroup(float curDelay)
     {
-        Rounds curRound = waves[curWaveC - 1].rounds[curRoundC-1];
+        Rounds curRound = waves[curWaveC - 1].rounds[curRoundC - 1];
         SpawnSpcfEnemy(curRound.enemy1C, Enemy1);
         SpawnSpcfEnemy(curRound.enemy2C, Enemy2);
         SpawnSpcfEnemy(curRound.enemy3C, Enemy3);
-        
+
         if (curRound.boss)
             SpawnSpcfEnemy(1, Boss);
 
         yield return new WaitForSeconds(curDelay);
+        if (curRoundC < waves[curWaveC - 1].AmountRounds)
+        {
+            curRoundC++;
+            StartCoroutine(SpawnGroup(delay));
+        }
+        else
+            waveActive = false;
     }
 
     private void SpawnSpcfEnemy(int amount, GameObject enemy)
@@ -70,6 +86,7 @@ public class WaveManager : MonoBehaviour
 
             Instantiate(enemy, transform.position, Quaternion.identity);
             enemy.GetComponent<GeneralEnemyScript>().EndPos = pos;
+            enemyC++;
         }
     }
     private Vector3 ChooseEnemyPosHor()
@@ -82,6 +99,10 @@ public class WaveManager : MonoBehaviour
     {
         Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        return new Vector3(lowerLeft.x,UnityEngine.Random.Range(upperRight.y,upperRight.y-3),0);
+        return new Vector3(lowerLeft.x, UnityEngine.Random.Range(upperRight.y, upperRight.y - 3), 0);
+    }
+    public void EnemyCountChange(int changeAmount)
+    {
+        enemyC += changeAmount;
     }
 }

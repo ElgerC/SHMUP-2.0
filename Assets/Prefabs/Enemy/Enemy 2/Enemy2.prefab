@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d08e90d8c5002a419a96c2496dd753d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneObjData: {fileID: 11400000, guid: 8c6869a3b6d5ffa49a8b031d45eb04d3, type: 2}
   state: 0
   health: 3
-  StartPos: {x: 1, y: 0, z: 0}
+  EndPos: {x: -8.888889, y: 4.5335884, z: 0}
   delay: 0
   bullet: {fileID: 0}
+  drops: []
   canMoveDown: 1
   Speed: 3
 --- !u!50 &8345068292565216374

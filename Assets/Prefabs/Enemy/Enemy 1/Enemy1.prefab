@@ -47,9 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524097e4e4a34a64aa7496ad33395a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneObjData: {fileID: 11400000, guid: 5c2008d10e7f985469bbe51584486566, type: 2}
   state: 0
   health: 3
-  EndPos: {x: -4.4091043, y: 4, z: 0}
+  EndPos: {x: -1.3713381, y: 4, z: 0}
   delay: 3
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
   drops:

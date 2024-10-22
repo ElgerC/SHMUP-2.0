@@ -74,11 +74,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c0b30bc246e354798f2065f0207ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneObjData: {fileID: 11400000, guid: 9cf7cb89fed0a244c89f9e849dc7fbde, type: 2}
   state: 0
   health: 0
-  StartPos: {x: 0, y: 4.18, z: 0}
+  EndPos: {x: 7.958881, y: 4, z: 0}
   delay: 2
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
+  drops: []
   direction: {x: 1, y: 0, z: 0}
   StrtDirect: -1
   offset: 0.5

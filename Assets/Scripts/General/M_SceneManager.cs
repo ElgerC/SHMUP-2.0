@@ -10,6 +10,9 @@ public class M_SceneManager : MonoBehaviour
     public List<M_SceneObject> sceneObjects = new List<M_SceneObject>();
 
     public static M_SceneManager instance;
+
+    public int sceneObjSpriteIndex = 0;
+    
     private void Awake()
     {
         if (instance == null)
@@ -17,7 +20,6 @@ public class M_SceneManager : MonoBehaviour
             instance = new M_SceneManager();
         }
 
-        
         foreach (var item in sceneObjects)
         {
             Debug.Log(item.gameObject.name);

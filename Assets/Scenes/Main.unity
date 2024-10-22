@@ -1182,28 +1182,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - rounds:
-    - enemy1C: 3
+    - enemy1C: 2
+      enemy2C: 0
+      enemy3C: 0
+      boss: 0
+    - enemy1C: 2
+      enemy2C: 1
+      enemy3C: 0
+      boss: 0
+    - enemy1C: 1
       enemy2C: 2
-      enemy3C: 1
+      enemy3C: 0
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 0
+      enemy3C: 0
       boss: 1
+    AmountRounds: 4
+  - rounds:
     - enemy1C: 0
-      enemy2C: 0
+      enemy2C: 2
       enemy3C: 0
+      boss: 0
+    - enemy1C: 1
+      enemy2C: 2
+      enemy3C: 0
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 1
+      enemy3C: 1
       boss: 0
     - enemy1C: 0
       enemy2C: 0
       enemy3C: 0
+      boss: 1
+    AmountRounds: 4
+  - rounds:
+    - enemy1C: 0
+      enemy2C: 1
+      enemy3C: 1
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 1
+      enemy3C: 2
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 0
+      enemy3C: 2
       boss: 0
     - enemy1C: 0
       enemy2C: 0
       enemy3C: 0
+      boss: 1
+    AmountRounds: 4
+  - rounds:
+    - enemy1C: 1
+      enemy2C: 1
+      enemy3C: 1
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 0
+      enemy3C: 2
+      boss: 0
+    - enemy1C: 0
+      enemy2C: 1
+      enemy3C: 2
       boss: 0
     - enemy1C: 0
       enemy2C: 0
       enemy3C: 0
-      boss: 0
-  - rounds: []
-  - rounds: []
+      boss: 1
+    AmountRounds: 4
   curWaveC: 1
   curRoundC: 1
   enemyC: 0
@@ -1211,7 +1260,7 @@ MonoBehaviour:
   Enemy2: {fileID: 7118510049315123636, guid: efa745ea61f7d5b4683939744e604de3, type: 3}
   Enemy3: {fileID: 3465596003160246598, guid: ea6cb05cc4144a1499552bcf7a9e740e, type: 3}
   Boss: {fileID: 695508779236472288, guid: 74e747d52e39c55458a645235f700154, type: 3}
-  delay: 0
+  delay: 5
 --- !u!4 &2091000259
 Transform:
   m_ObjectHideFlags: 0
@@ -1429,14 +1478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780331ec903990940b4ae8d32f2feadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Look1: {fileID: 0}
-  Look2: {fileID: 0}
-  Look3: {fileID: 0}
+  sceneObjData: {fileID: 11400000, guid: 20ba04d61c1bdb945a1218b4d60d5139, type: 2}
   rb: {fileID: 2514445796280603656}
   moveSpeed: 6
   bullet: {fileID: 5269081503901300651, guid: 2868cf8eeb0f37f40bef25f33fb11514, type: 3}
   canFire: 0
-  health: 2e+22
+  health: 3
 --- !u!61 &2514445796280603661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1500,9 +1547,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 912667858}
+  - {fileID: 1339285054}
   - {fileID: 2514445796280603654}
   - {fileID: 474781654}
   - {fileID: 897920935}
   - {fileID: 675337085}
   - {fileID: 2091000259}
-  - {fileID: 1339285054}

@@ -94,9 +94,10 @@ public abstract class GeneralEnemyScript : M_SceneObject
         yield return new WaitForSeconds(delay);
         canSht = true;
     }
-    //private void OnDestroy()
-    //{
-    //    if (Random.Range(0f, 100f) > 20)
-    //        Instantiate(drops[Random.Range(0, drops.Count)],transform.position,Quaternion.identity);
-    //}
+    private void OnDestroy()
+    {
+        WaveManager.instance.EnemyCountChange(-1);
+        //if (Random.Range(0f, 100f) > 20)
+        //    Instantiate(drops[Random.Range(0, drops.Count)], transform.position, Quaternion.identity);
+    }
 }
