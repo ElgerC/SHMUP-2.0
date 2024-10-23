@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class M_SceneManager : MonoBehaviour
@@ -11,22 +12,42 @@ public class M_SceneManager : MonoBehaviour
 
     public static M_SceneManager instance;
 
-    public int sceneObjSpriteIndex = 0;
-    
+    public int sceneObjSpriteIndex;
+
     private void Awake()
     {
         if (instance == null)
         {
-            instance = new M_SceneManager();
-        }
-
-        foreach (var item in sceneObjects)
-        {
-            Debug.Log(item.gameObject.name);
+            instance = this;
         }
     }
-    private void Update()
+
+    private void ChangeScene()
     {
-        sceneObjects = FindObjectsOfType<M_SceneObject>().ToList();
+        foreach (var item in sceneObjects)
+        {
+            item.ReasignSprite();
+        }
+    }
+
+    public void IndexIncrease(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            sceneObjSpriteIndex++;
+            if (sceneObjSpriteIndex > 2)
+                sceneObjSpriteIndex = 0;
+            ChangeScene();
+        }
+    }
+    public void IndexDecrease(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            sceneObjSpriteIndex--;
+            if (sceneObjSpriteIndex < 0)
+                sceneObjSpriteIndex = 2;
+            ChangeScene();
+        }
     }
 }

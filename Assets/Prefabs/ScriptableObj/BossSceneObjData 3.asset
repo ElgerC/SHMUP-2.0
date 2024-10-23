@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BossSceneObjData 3
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 5de1e4c293a0f9e4aba7190315aebe79, type: 3}
+  - {fileID: 21300000, guid: 73cdfd360d3c5e448a52f9badda83c96, type: 3}
+  - {fileID: 21300000, guid: a998705e0ecc9cb4da508eeb34be3119, type: 3}
+  - {fileID: 21300000, guid: ab6c5bfc22697d84f892e5b8f28a80ee, type: 3}

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: 755fd4c73ed58a64fb09ae65de817046, type: 3}
+  - {fileID: 21300000, guid: 5de1e4c293a0f9e4aba7190315aebe79, type: 3}
+  - {fileID: 21300000, guid: d5ce9f2010e57064a84e82a00819b24e, type: 3}

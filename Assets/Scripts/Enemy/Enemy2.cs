@@ -22,8 +22,9 @@ public class Enemy2 : GeneralEnemyScript
         rightBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0)).x;
         leftBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1)).x;
     }
-    private void Start()
-    {      
+    protected override void Start()
+    {   
+        base.Start();
         while(startDirection.z == 0)
         {
             startDirection = new Vector3(0, 0, Random.Range(-2000, 2000)).normalized;

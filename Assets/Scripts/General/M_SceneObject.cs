@@ -6,13 +6,24 @@ public abstract class M_SceneObject : MonoBehaviour
 {
     [SerializeField] protected sceneObjectScriptableObject sceneObjData;
     private List<Sprite> sprites = new List<Sprite>();
-
-    protected virtual void Awake()
+    M_SceneManager sceneManager;
+    SpriteRenderer spriteRenderer;
+    protected virtual void Start()
     {
-        M_SceneManager.instance.sceneObjects.Add(this);
+        sceneManager = M_SceneManager.instance;
+        sceneManager.sceneObjects.Add(this);
+
         if (GetComponent<Sprite>() != null)
-            GetComponent<SpriteRenderer>().sprite = sceneObjData.sprites[M_SceneManager.instance.sceneObjSpriteIndex];
+            spriteRenderer = GetComponent<SpriteRenderer>();
         else
-            GetComponentInChildren<SpriteRenderer>().sprite = sceneObjData.sprites[M_SceneManager.instance.sceneObjSpriteIndex];
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        ReasignSprite();
     }
+    public void ReasignSprite()
+    {
+        spriteRenderer.sprite = sceneObjData.sprites[sceneManager.sceneObjSpriteIndex];        
+    }
+
+    
 }

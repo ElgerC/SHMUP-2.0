@@ -25,9 +25,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
     public List<GameObject> drops;
 
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
         state = States.spawning;
         StartPos = transform.position;
     }
