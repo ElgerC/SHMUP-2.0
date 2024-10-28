@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,9 @@ public class PlayerScript : M_SceneObject
 
     //Health variables
     [SerializeField] float health;
+    [SerializeField] bool CanGetHit = true;
+    [SerializeField] float hitImunityDur;
+    [SerializeField] private bool ShieldActive = false;
 
     private void Awake()
     {
@@ -39,8 +43,38 @@ public class PlayerScript : M_SceneObject
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        health -= 1;
-        if (health <= 0)
-            SceneManager.LoadScene("StartScene");
+        if (collision.tag != "Drop")
+        {    
+            if (CanGetHit && !ShieldActive)
+            {
+                Debug.Log("Player hit");
+                health -= 1;
+                if (health <= 0)
+                    SceneManager.LoadScene("StartScene");
+                StartCoroutine(Imunity(hitImunityDur));
+            }
+            if (ShieldActive)
+            {
+                ShieldActive = false;
+                return;
+            }
+        }
+           
+    }
+    private IEnumerator Imunity(float duration)
+    {
+        CanGetHit = false;
+        yield return new WaitForSeconds(duration);
+        CanGetHit = true;
+    }
+    public IEnumerator ShieldDur(float duration)
+    {
+        ShieldActive = true;
+        yield return new WaitForSeconds(duration);
+        ShieldActive = false;
+    }
+    public void Shield(float time)
+    {
+        StartCoroutine(ShieldDur(time));
     }
 }

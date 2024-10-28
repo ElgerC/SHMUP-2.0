@@ -54,7 +54,8 @@ MonoBehaviour:
   EndPos: {x: -8.888889, y: 4.5335884, z: 0}
   delay: 0
   bullet: {fileID: 0}
-  drops: []
+  EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
+  dropChance: 20
   canMoveDown: 1
   Speed: 3
 --- !u!50 &8345068292565216374

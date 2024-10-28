@@ -22,11 +22,14 @@ public abstract class GeneralEnemyScript : M_SceneObject
     [SerializeField] float delay;
     [SerializeField] protected GameObject bullet;
 
-    public List<GameObject> drops;
-
+    //Drops variables
+    [SerializeField] EnemyDrops EnemyDropsScriptObj;
+    private List<GameObject> enemyDrops;
+    [SerializeField] float dropChance;
 
     protected virtual void Awake()
     {
+        enemyDrops = EnemyDropsScriptObj.Drops;
         state = States.spawning;
         StartPos = transform.position;
     }
@@ -64,6 +67,12 @@ public abstract class GeneralEnemyScript : M_SceneObject
     }
     protected virtual void Death()
     {
+        WaveManager.instance.EnemyCountChange(-1);
+        if (Random.Range(100, 0) <= dropChance)
+        {
+            GameObject obj = enemyDrops[Random.Range(0, enemyDrops.Count)];
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
         state = States.dying;
         Destroy(gameObject);
     }
@@ -92,11 +101,5 @@ public abstract class GeneralEnemyScript : M_SceneObject
         canSht = false;
         yield return new WaitForSeconds(delay);
         canSht = true;
-    }
-    private void OnDestroy()
-    {
-        WaveManager.instance.EnemyCountChange(-1);
-        //if (Random.Range(0f, 100f) > 20)
-        //    Instantiate(drops[Random.Range(0, drops.Count)], transform.position, Quaternion.identity);
     }
 }

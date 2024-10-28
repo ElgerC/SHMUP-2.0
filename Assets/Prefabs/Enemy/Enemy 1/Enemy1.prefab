@@ -53,8 +53,8 @@ MonoBehaviour:
   EndPos: {x: -1.3713381, y: 4, z: 0}
   delay: 3
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
-  drops:
-  - {fileID: 0}
+  EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
+  dropChance: 10
 --- !u!95 &2775804432787611636
 Animator:
   serializedVersion: 5
