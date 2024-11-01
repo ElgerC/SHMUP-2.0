@@ -24,6 +24,9 @@ public class PlayerScript : M_SceneObject
     [SerializeField] float hitImunityDur;
     [SerializeField] private bool ShieldActive = false;
 
+    //Upgrade 
+    private int UpgradeIndex = 3;
+
     private void Awake()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
@@ -45,7 +48,7 @@ public class PlayerScript : M_SceneObject
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Drop")
-        {    
+        {
             if (CanGetHit && !ShieldActive)
             {
                 Debug.Log("Player hit");
@@ -60,7 +63,7 @@ public class PlayerScript : M_SceneObject
                 return;
             }
         }
-           
+
     }
     private IEnumerator Imunity(float duration)
     {
@@ -77,5 +80,20 @@ public class PlayerScript : M_SceneObject
     public void Shield(float time)
     {
         StartCoroutine(ShieldDur(time));
+    }
+    public void Upgrade()
+    {
+        if(UpgradeIndex < 3)
+        {
+            UpgradeIndex++;
+        }
+        SpeedBoost(2);
+    }
+    private IEnumerator SpeedBoost(float delay)
+    {
+        float pastSpeed = moveSpeed;
+        moveSpeed = moveSpeed * 1.5f;
+        yield return new WaitForSeconds(delay);
+        moveSpeed = pastSpeed;
     }
 }
