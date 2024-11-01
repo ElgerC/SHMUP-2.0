@@ -56,8 +56,9 @@ MonoBehaviour:
   bullet: {fileID: 0}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
   dropChance: 20
+  Value: 1
   canMoveDown: 1
-  Speed: 3
+  Speed: 2
 --- !u!50 &8345068292565216374
 Rigidbody2D:
   serializedVersion: 4

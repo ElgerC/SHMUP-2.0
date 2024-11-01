@@ -11,6 +11,7 @@ public class EnemyHomeBullet : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = transform.GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 5);
     }
     private void Start()
     {

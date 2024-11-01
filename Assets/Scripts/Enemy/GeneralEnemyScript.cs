@@ -6,32 +6,39 @@ using UnityEngine.AI;
 
 public abstract class GeneralEnemyScript : M_SceneObject
 {
+
+
+    //State variables
     public enum States
     {
         spawning,
         moving,
         dying,
     }
-
     public States state;
-    [SerializeField] float health;
-    private Vector3 StartPos;
-    public Vector3 EndPos;
     private bool movingToStart = false;
+
+    //Health
+    [SerializeField] float health;
+
+    //StartMovement
+    public Vector3 EndPos;
+    
+    //Shooting variables
     protected bool canSht = true;
     [SerializeField] float delay;
     [SerializeField] protected GameObject bullet;
 
-    //Drops variables
+    //Deaths variables
     [SerializeField] EnemyDrops EnemyDropsScriptObj;
     private List<GameObject> enemyDrops;
     [SerializeField] float dropChance;
+    [SerializeField] protected int Value;
 
     protected virtual void Awake()
     {
         enemyDrops = EnemyDropsScriptObj.Drops;
         state = States.spawning;
-        StartPos = transform.position;
     }
     public void Spawned()
     {
@@ -73,6 +80,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
             GameObject obj = enemyDrops[Random.Range(0, enemyDrops.Count)];
             Instantiate(obj, transform.position, Quaternion.identity);
         }
+        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + Value);
+        Debug.Log(PlayerPrefs.GetInt("Score") + Value);
         state = States.dying;
         Destroy(gameObject);
     }

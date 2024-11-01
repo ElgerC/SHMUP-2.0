@@ -82,6 +82,7 @@ MonoBehaviour:
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
   dropChance: 100
+  Value: 10
   direction: {x: 1, y: 0, z: 0}
   StrtDirect: -1
   offset: 0.5

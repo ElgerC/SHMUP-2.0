@@ -19,11 +19,6 @@ public class Enemy1 : GeneralEnemyScript
     {
         Shoot();
     }
-    protected override void Death()
-    {
-        animator.SetTrigger("Die");
-        state = States.dying;
-    }
     public void DestroySelf()
     {
         Destroy(gameObject);

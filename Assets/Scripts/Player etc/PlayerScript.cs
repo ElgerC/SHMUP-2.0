@@ -27,6 +27,7 @@ public class PlayerScript : M_SceneObject
     private void Awake()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
+        PlayerPrefs.SetInt("Score", 0);
     }
     //Movement
     public void Movement(InputAction.CallbackContext ctx)
@@ -50,7 +51,7 @@ public class PlayerScript : M_SceneObject
                 Debug.Log("Player hit");
                 health -= 1;
                 if (health <= 0)
-                    SceneManager.LoadScene("StartScene");
+                    SceneManager.LoadScene("EndScene");
                 StartCoroutine(Imunity(hitImunityDur));
             }
             if (ShieldActive)
