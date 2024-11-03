@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private bool ShieldActive = false;
 
     //Upgrade varaibles
-    private int UpgradeIndex = 1;
+    [SerializeField] private int UpgradeIndex = 1;
 
     //Versions variables
     [SerializeField] private PlayerScriptableObject playerSO;

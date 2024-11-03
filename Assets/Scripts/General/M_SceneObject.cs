@@ -23,6 +23,10 @@ public abstract class M_SceneObject : MonoBehaviour
     {
         spriteRenderer.sprite = sceneObjData.sprites[sceneManager.sceneObjSpriteIndex];        
     }
+    private void OnDestroy()
+    {
+        sceneManager.sceneObjects.Remove(gameObject);
+    }
 
-    
+
 }
