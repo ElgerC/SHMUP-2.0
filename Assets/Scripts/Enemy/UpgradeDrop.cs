@@ -7,7 +7,9 @@ public class UpgradeDrop : Drops
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<PlayerScript>().Upgrade();
+        PlayerScript playerScript = GetComponent<PlayerScript>();
+        playerScript.Upgrade();
+        playerScript.ReasignSprite();
         Destroy(gameObject);
     }
 }

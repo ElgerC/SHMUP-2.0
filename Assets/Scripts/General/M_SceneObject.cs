@@ -5,13 +5,12 @@ using UnityEngine;
 public abstract class M_SceneObject : MonoBehaviour
 {
     [SerializeField] protected sceneObjectScriptableObject sceneObjData;
-    private List<Sprite> sprites = new List<Sprite>();
     M_SceneManager sceneManager;
     SpriteRenderer spriteRenderer;
     protected virtual void Start()
     {
         sceneManager = M_SceneManager.instance;
-        sceneManager.sceneObjects.Add(this);
+        sceneManager.sceneObjects.Add(gameObject);
 
         if (GetComponent<Sprite>() != null)
             spriteRenderer = GetComponent<SpriteRenderer>();

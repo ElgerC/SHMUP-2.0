@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class M_SceneManager : MonoBehaviour
 {
-    public List<M_SceneObject> sceneObjects = new List<M_SceneObject>();
+    public List<GameObject> sceneObjects = new List<GameObject>();
 
     public static M_SceneManager instance;
 
@@ -24,9 +24,17 @@ public class M_SceneManager : MonoBehaviour
 
     private void ChangeScene()
     {
-        foreach (var item in sceneObjects)
+        foreach (var obj in sceneObjects)
         {
-            item.ReasignSprite();
+            if (obj.tag != "Player")
+            {
+                obj.GetComponent<M_SceneObject>().ReasignSprite();
+            }
+            else
+            {
+                obj.GetComponent<PlayerScript>().ReasignSprite();               
+            }
+                
         }
     }
 

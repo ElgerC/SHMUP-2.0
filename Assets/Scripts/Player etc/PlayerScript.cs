@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerScript : M_SceneObject
+public class PlayerScript : MonoBehaviour
 {
     //General variables
     public Rigidbody2D rb;
@@ -24,13 +24,18 @@ public class PlayerScript : M_SceneObject
     [SerializeField] float hitImunityDur;
     [SerializeField] private bool ShieldActive = false;
 
-    //Upgrade 
-    private int UpgradeIndex = 3;
+    //Upgrade varaibles
+    private int UpgradeIndex = 1;
 
+    //Versions variables
+    [SerializeField] private PlayerScriptableObject playerSO;
+    SpriteRenderer spriteRenderer;
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponentInChildren<Rigidbody2D>();
         PlayerPrefs.SetInt("Score", 0);
+        M_SceneManager.instance.sceneObjects.Add(gameObject);
     }
     //Movement
     public void Movement(InputAction.CallbackContext ctx)
@@ -95,5 +100,9 @@ public class PlayerScript : M_SceneObject
         moveSpeed = moveSpeed * 1.5f;
         yield return new WaitForSeconds(delay);
         moveSpeed = pastSpeed;
+    }
+    public void ReasignSprite()
+    {
+        spriteRenderer.sprite = playerSO.playerVersions[M_SceneManager.instance.sceneObjSpriteIndex].versionSprites[UpgradeIndex-1];
     }
 }
