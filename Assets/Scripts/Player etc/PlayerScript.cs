@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,14 +10,20 @@ public class PlayerScript : MonoBehaviour
 {
     //General variables
     public Rigidbody2D rb;
+    private Animator animator;
 
     //Movement variables
     public float moveSpeed;
     private Vector2 _moveDirection;
 
-    //Bullet variables
+    //Shoot variables
     [SerializeField] GameObject bullet;
-    [SerializeField] bool canFire = false;
+    private bool canFire = true;
+    private bool autoFiring = false;
+    [SerializeField] private LayerMask enemyLayer;
+    private LineRenderer lineRen;
+    [SerializeField] float laserLength;
+
 
     //Health variables
     [SerializeField] float health;
@@ -30,12 +37,33 @@ public class PlayerScript : MonoBehaviour
     //Versions variables
     [SerializeField] private PlayerScriptableObject playerSO;
     SpriteRenderer spriteRenderer;
+    M_SceneManager sceneManager;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponentInChildren<Rigidbody2D>();
         PlayerPrefs.SetInt("Score", 0);
-        M_SceneManager.instance.sceneObjects.Add(gameObject);
+        sceneManager = M_SceneManager.instance;
+        sceneManager.sceneObjects.Add(gameObject);
+
+        lineRen = GetComponent<LineRenderer>();
+        lineRen.enabled = false;
+
+        animator = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        ReasignSprite();
+    }
+    private void Update()
+    {
+        if(sceneManager.sceneObjSpriteIndex == 2 && autoFiring)
+        {
+            Vector3 lRSP = transform.position;
+            Vector3 lREP = new Vector3(transform.position.x,transform.position.y+laserLength,transform.position.z);
+
+            lineRen.SetPositions(new Vector3[] {lRSP, lREP});
+        }
     }
     //Movement
     public void Movement(InputAction.CallbackContext ctx)
@@ -48,7 +76,72 @@ public class PlayerScript : MonoBehaviour
     {
         if (ctx.performed)
             if (Time.timeScale >= 1)
-                Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                if (canFire)
+                    switch (sceneManager.sceneObjSpriteIndex)
+                    {
+                        case 0:
+                            StartCoroutine(SingleShot());
+                            break;
+                        case 1:
+                            if (!autoFiring)
+                                StartCoroutine(AutoShoot());
+                            else
+                                autoFiring = false;
+                            break;
+                        case 2:
+                            if (!autoFiring)
+                            {
+                                animator.SetTrigger("LaserFadeIn");
+                                autoFiring = true;
+                            }
+                            else
+                            {
+                                animator.SetTrigger("LaserFadeOut");
+                                autoFiring = false;
+                            }
+                                
+                            break;
+                    }
+
+
+    }
+
+    private IEnumerator SingleShot()
+    {
+        canFire = false;
+        Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(1 - (UpgradeIndex / 4));
+        canFire = true;
+
+    }
+    private IEnumerator AutoShoot()
+    {
+        autoFiring = true;
+        while (autoFiring)
+        {
+            Instantiate(bullet, new Vector2(transform.position.x, transform.position.y), Quaternion.Euler(0, 0, Random.Range(10 * UpgradeIndex, -10 * UpgradeIndex)));
+            yield return new WaitForSeconds(0.55f - (0.15f * UpgradeIndex));
+        }
+    }
+    public void LaserFadeIn()
+    {
+        lineRen.enabled = true;
+    }
+    public void LaserFadeOut()
+    {
+        lineRen.enabled = false;
+    }
+    public void LaserDmg()
+    {
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(transform.position, transform.forward, laserLength, enemyLayer);
+        if (hit.Length > 0)
+        {
+            foreach (RaycastHit obj in hit)
+            {
+                obj.transform.gameObject.GetComponent<GeneralEnemyScript>().TakeDmg(1);
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -88,7 +181,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void Upgrade()
     {
-        if(UpgradeIndex < 3)
+        if (UpgradeIndex < 3)
         {
             UpgradeIndex++;
         }
@@ -103,6 +196,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void ReasignSprite()
     {
-        spriteRenderer.sprite = playerSO.playerVersions[M_SceneManager.instance.sceneObjSpriteIndex].versionSprites[UpgradeIndex-1];
+        autoFiring = false;
+        spriteRenderer.sprite = playerSO.playerVersions[sceneManager.sceneObjSpriteIndex].versionSprites[UpgradeIndex - 1];
     }
 }

@@ -111,4 +111,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
         yield return new WaitForSeconds(delay);
         canSht = true;
     }
+    public void TakeDmg(float amount)
+    {
+        health -= amount;
+    }
 }
