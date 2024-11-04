@@ -8,7 +8,7 @@ public abstract class ProjectileScript : MonoBehaviour
     [SerializeField] float speedY;
     Rigidbody2D _rb;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -17,7 +17,7 @@ public abstract class ProjectileScript : MonoBehaviour
         _rb.velocity = transform.up*speedY;
         Destroy(gameObject, 5);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         OnHit();
         Destroy(gameObject);

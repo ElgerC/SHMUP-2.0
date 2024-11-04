@@ -38,6 +38,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private PlayerScriptableObject playerSO;
     SpriteRenderer spriteRenderer;
     M_SceneManager sceneManager;
+
+    //Abilities variables
+    [SerializeField] private List<GameObject> abilityProjectiles = new List<GameObject>();
+    [SerializeField] private GameObject spawnPoint;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -142,13 +146,41 @@ public class PlayerScript : MonoBehaviour
             {
                 if (obj.transform.GetComponent<GeneralEnemyScript>() != null)
                 {
-                    GeneralEnemyScript generalEnemyScript = obj.transform.GetComponent< GeneralEnemyScript>();
-                    generalEnemyScript.TakeDmg((generalEnemyScript.health/5));
+                    GeneralEnemyScript generalEnemyScript = obj.transform.GetComponent<GeneralEnemyScript>();
+                    generalEnemyScript.TakeDmg((generalEnemyScript.health / 5));
                 }
-                    
+
 
             }
         }
+    }
+    public void Ability(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            switch (sceneManager.sceneObjSpriteIndex)
+            {
+                case 0:
+                    SpawnMulti(UpgradeIndex, abilityProjectiles[0]);
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+            }
+        }
+    }
+    private void SpawnMulti(float amount,GameObject obj)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            float spawnRotate = (-17.5f * (i- 1)) + (35 * i);
+            spawnPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, spawnRotate));
+            Instantiate(obj, new Vector3(gameObject.transform.position.x + (spawnPoint.transform.up.x*4), gameObject.transform.position.y + spawnPoint.transform.up.y,gameObject.transform.position.z), Quaternion.Euler(new Vector3(0,0,spawnRotate)));
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

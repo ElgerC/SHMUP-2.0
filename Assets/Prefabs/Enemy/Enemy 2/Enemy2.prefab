@@ -52,7 +52,7 @@ MonoBehaviour:
   sceneObjData: {fileID: 11400000, guid: 8c6869a3b6d5ffa49a8b031d45eb04d3, type: 2}
   state: 0
   health: 3
-  EndPos: {x: -8.888889, y: 4.5335884, z: 0}
+  EndPos: {x: -8.888889, y: 4.159804, z: 0}
   delay: 0
   bullet: {fileID: 0}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
@@ -115,7 +115,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 1344
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
