@@ -7,7 +7,6 @@ public class Enemy3 : Enemy2
     protected override void Movement()
     {
         base.Movement();
-        Shoot();
-    }
-    
+        StartCoroutine(Shoot());
+    }   
 }

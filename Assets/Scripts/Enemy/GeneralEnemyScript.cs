@@ -28,7 +28,7 @@ public abstract class GeneralEnemyScript : M_SceneObject
     
     //Shooting variables
     protected bool canSht = true;
-    [SerializeField] float delay;
+    [SerializeField] protected float delay;
     [SerializeField] protected GameObject bullet;
 
     //Deaths variables
@@ -98,14 +98,18 @@ public abstract class GeneralEnemyScript : M_SceneObject
         transform.position = EndPos;
         state = States.moving;
     }
-    protected virtual void Shoot()
+    protected virtual IEnumerator Shoot()
     {
         if (canSht)
         {
-            float projectiles = 1 + Mathf.Round(0);
-            for (int i = 0; i < projectiles; i++)
-                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
             StartCoroutine(Shooting());
+            float projectiles = 1 + Mathf.Round(WaveManager.instance.curWaveC / 2);
+            for (int i = 0; i < projectiles; i++)
+            {
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
+                yield return new WaitForSeconds(0.3f);
+            }                
+            
         }
     }
     protected virtual IEnumerator Shooting()

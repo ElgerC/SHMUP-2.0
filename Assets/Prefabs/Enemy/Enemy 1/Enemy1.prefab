@@ -56,6 +56,9 @@ MonoBehaviour:
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
   dropChance: 10
   Value: 2
+  bullets:
+  - {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
+  - {fileID: 6266703392661441304, guid: 274b2511cb931b841b45b2192620749a, type: 3}
 --- !u!95 &2775804432787611636
 Animator:
   serializedVersion: 5

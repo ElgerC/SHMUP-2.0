@@ -21,6 +21,8 @@ public class Enemy2 : GeneralEnemyScript
         
         rightBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0)).x;
         leftBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1)).x;
+
+        Speed = 1 + (WaveManager.instance.curWaveC / 4);
     }
     protected override void Start()
     {   

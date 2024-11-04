@@ -78,18 +78,15 @@ MonoBehaviour:
   sceneObjData: {fileID: 11400000, guid: 9cf7cb89fed0a244c89f9e849dc7fbde, type: 2}
   state: 0
   health: 0
-  EndPos: {x: 7.5260906, y: 4, z: 0}
-  delay: 2
-  bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
+  EndPos: {x: -0.93123436, y: 4, z: 0}
+  delay: 1.5
+  bullet: {fileID: 6266703392661441304, guid: 274b2511cb931b841b45b2192620749a, type: 3}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
   dropChance: 100
   Value: 10
   direction: {x: 1, y: 0, z: 0}
   StrtDirect: -1
   offset: 0.5
-  bullets:
-  - {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
-  - {fileID: 6266703392661441304, guid: 274b2511cb931b841b45b2192620749a, type: 3}
 --- !u!61 &2755037712883183869
 BoxCollider2D:
   m_ObjectHideFlags: 0

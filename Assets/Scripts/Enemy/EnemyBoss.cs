@@ -13,11 +13,10 @@ public class EnemyBoss : GeneralEnemyScript
 
     [SerializeField] float offset;
 
-    [SerializeField] private List<GameObject> bullets;
-
     bool hasStart = false;
     protected override void Awake()
     {
+        health = (4 * WaveManager.instance.curWaveC) + 12;
         base.Awake();
         Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -49,18 +48,11 @@ public class EnemyBoss : GeneralEnemyScript
             hasStart = true;
         }
         if (canSht)
-        {
-            if (bullet == bullets[0])
-            {
-                bullet = bullets[1];
-            }
-            else if (bullet == bullets[1])
-            {
-                bullet = bullets[0];
-            }
-        }
-        Shoot();
-
+            StartCoroutine(Shoot());
+    }
+    protected override IEnumerator Shoot()
+    {
+        return base.Shoot();
     }
     private void ChangeDirection(float x)
     {
