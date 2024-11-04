@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public abstract class GeneralEnemyScript : M_SceneObject
 {
-
+    //General states
+    private Animator animator;
 
     //State variables
     public enum States
@@ -19,7 +20,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
     private bool movingToStart = false;
 
     //Health
-    [SerializeField] float health;
+    public float health;
+    private float curHealth;
 
     //StartMovement
     public Vector3 EndPos;
@@ -38,6 +40,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
     protected virtual void Awake()
     {
         enemyDrops = EnemyDropsScriptObj.Drops;
+        animator = GetComponent<Animator>();
+        curHealth = health;
         state = States.spawning;
     }
     public void Spawned()
@@ -68,9 +72,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
     } 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        health -= 1;
-        if (health <= 0)
-            Death();
+        TakeDmg(1);
+        
     }
     protected virtual void Death()
     {
@@ -113,6 +116,9 @@ public abstract class GeneralEnemyScript : M_SceneObject
     }
     public void TakeDmg(float amount)
     {
-        health -= amount;
+        curHealth -= amount;
+        animator.SetTrigger("DmgFlash");
+        if (curHealth <= 0)
+            Death();
     }
 }

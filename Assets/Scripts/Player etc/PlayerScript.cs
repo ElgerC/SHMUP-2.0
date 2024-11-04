@@ -57,12 +57,12 @@ public class PlayerScript : MonoBehaviour
     }
     private void Update()
     {
-        if(sceneManager.sceneObjSpriteIndex == 2 && autoFiring)
+        if (sceneManager.sceneObjSpriteIndex == 2)
         {
             Vector3 lRSP = transform.position;
-            Vector3 lREP = new Vector3(transform.position.x,transform.position.y+laserLength,transform.position.z);
+            Vector3 lREP = new Vector3(transform.position.x, transform.position.y + laserLength, transform.position.z);
 
-            lineRen.SetPositions(new Vector3[] {lRSP, lREP});
+            lineRen.SetPositions(new Vector3[] { lRSP, lREP });
         }
     }
     //Movement
@@ -99,7 +99,7 @@ public class PlayerScript : MonoBehaviour
                                 animator.SetTrigger("LaserFadeOut");
                                 autoFiring = false;
                             }
-                                
+
                             break;
                     }
 
@@ -133,13 +133,20 @@ public class PlayerScript : MonoBehaviour
     }
     public void LaserDmg()
     {
-        RaycastHit[] hit;
-        hit = Physics.RaycastAll(transform.position, transform.forward, laserLength, enemyLayer);
+        RaycastHit2D[] hit;
+        hit = Physics2D.RaycastAll(transform.position, transform.up * laserLength, laserLength, enemyLayer);
         if (hit.Length > 0)
         {
-            foreach (RaycastHit obj in hit)
+            Debug.Log(hit[0]);
+            foreach (RaycastHit2D obj in hit)
             {
-                obj.transform.gameObject.GetComponent<GeneralEnemyScript>().TakeDmg(1);
+                if (obj.transform.GetComponent<GeneralEnemyScript>() != null)
+                {
+                    GeneralEnemyScript generalEnemyScript = obj.transform.GetComponent< GeneralEnemyScript>();
+                    generalEnemyScript.TakeDmg((generalEnemyScript.health/5));
+                }
+                    
+
             }
         }
     }
@@ -197,6 +204,7 @@ public class PlayerScript : MonoBehaviour
     public void ReasignSprite()
     {
         autoFiring = false;
+        animator.SetFloat("Speed", 1 * UpgradeIndex);
         spriteRenderer.sprite = playerSO.playerVersions[sceneManager.sceneObjSpriteIndex].versionSprites[UpgradeIndex - 1];
     }
 }

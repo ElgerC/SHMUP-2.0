@@ -50,7 +50,7 @@ MonoBehaviour:
   sceneObjData: {fileID: 11400000, guid: 5c2008d10e7f985469bbe51584486566, type: 2}
   state: 0
   health: 3
-  EndPos: {x: -3.7737882, y: 4, z: 0}
+  EndPos: {x: -7.27782, y: 4, z: 0}
   delay: 3
   bullet: {fileID: 594312499658079637, guid: 42a4af1d5d657644a8442912dbc0c232, type: 3}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}

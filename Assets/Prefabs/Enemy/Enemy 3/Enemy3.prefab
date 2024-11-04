@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3143582744755568062}
   - component: {fileID: 5126908176234852411}
   - component: {fileID: 752819141460910072}
+  - component: {fileID: -988538415323082635}
   m_Layer: 8
   m_Name: Enemy3
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MonoBehaviour:
   sceneObjData: {fileID: 11400000, guid: fe959e0c967980744a80ceee51a17c09, type: 2}
   state: 0
   health: 3
-  EndPos: {x: -8.888889, y: 2.6321414, z: 0}
+  EndPos: {x: -8.888889, y: 3.0814822, z: 0}
   delay: 4
   bullet: {fileID: 6266703392661441304, guid: 274b2511cb931b841b45b2192620749a, type: 3}
   EnemyDropsScriptObj: {fileID: 11400000, guid: 41ec8b8c378ec9940ae9a09fd793ef24, type: 2}
@@ -144,6 +145,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-988538415323082635
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465596003160246598}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 905498f14376bc14fa40019fe6c067c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3911640748241324435
 GameObject:
   m_ObjectHideFlags: 0

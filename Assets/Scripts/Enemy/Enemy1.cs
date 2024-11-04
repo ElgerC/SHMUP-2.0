@@ -7,11 +7,8 @@ using UnityEngine;
 
 public class Enemy1 : GeneralEnemyScript
 {
-    //animation
-    Animator animator;
     protected override void Awake()
     {
-        animator = GetComponent<Animator>();
         base.Awake();
     }
 
