@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 390283326240298382}
   - component: {fileID: 5249856977220996214}
   - component: {fileID: 5323960181010439876}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: GhostShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}

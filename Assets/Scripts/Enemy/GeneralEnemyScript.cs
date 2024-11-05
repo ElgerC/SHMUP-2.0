@@ -21,7 +21,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
 
     //Health
     public float health;
-    private float curHealth;
+    public float curHealth;
+    public float dmgPercentage = 1;
 
     //StartMovement
     public Vector3 EndPos;
@@ -72,8 +73,7 @@ public abstract class GeneralEnemyScript : M_SceneObject
     } 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TakeDmg(1);
-        
+        TakeDmg(1);      
     }
     protected virtual void Death()
     {
@@ -120,7 +120,7 @@ public abstract class GeneralEnemyScript : M_SceneObject
     }
     public void TakeDmg(float amount)
     {
-        curHealth -= amount;
+        curHealth -= amount*dmgPercentage;
         animator.SetTrigger("DmgFlash");
         if (curHealth <= 0)
             Death();

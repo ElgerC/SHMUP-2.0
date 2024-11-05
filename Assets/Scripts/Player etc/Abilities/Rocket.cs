@@ -2,35 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class Rocket : ProjectileScript
 {
-    private GeneralEnemyScript[] enemieScripts;
-    private GameObject[] enemies;
-
-    private Vector3 nearestPos;
-    private void Awake()
+    private Collider2D[] colliders;
+    public float blastRange;
+    [SerializeField] private LayerMask enemyLayer;
+    protected override void OnHit()
     {
-        enemieScripts = FindObjectsOfType<GeneralEnemyScript>();
-        for (int i = 0; i < enemieScripts.Length; i++)
+        colliders = Physics2D.OverlapCircleAll(transform.position, blastRange,enemyLayer);
+        for(int i = 0; i < colliders.Length; i++)
         {
-            enemies[i] = enemieScripts[i].gameObject;
-        }        
-        findNearestEnemy();
-    }
-    private void findNearestEnemy()
-    {
-        nearestPos = enemies[0].transform.position;
-        for (int i = 0;i < enemies.Length; i++)
-        {
-            Vector3 posOption = enemies[i].transform.position;
-            if (Vector3.Distance(posOption,transform.position) <= Vector3.Distance(transform.position, nearestPos))
-            {
-                nearestPos = posOption;
-            }
+            Debug.Log(colliders[i].name);
+            colliders[i].GetComponent<GeneralEnemyScript>().TakeDmg(1);
         }
+        Destroy(gameObject);
     }
-    private void Update()
+    private void OnDrawGizmos()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nearestPos, 1);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, blastRange);
     }
 }

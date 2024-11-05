@@ -164,10 +164,10 @@ public class PlayerScript : MonoBehaviour
                     SpawnMulti(UpgradeIndex, abilityProjectiles[0]);
                     break;
                 case 1:
-
+                    SpawnRocket();
                     break;
                 case 2:
-
+                    GameObject obj = Instantiate(abilityProjectiles[2], new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
                     break;
             }
         }
@@ -176,11 +176,15 @@ public class PlayerScript : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            float spawnRotate = (-17.5f * (i- 1)) + (35 * i);
+            float spawnRotate = (-17.5f * (UpgradeIndex - 1)) + (35 * i);
             spawnPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, spawnRotate));
             Instantiate(obj, new Vector3(gameObject.transform.position.x + (spawnPoint.transform.up.x*4), gameObject.transform.position.y + spawnPoint.transform.up.y,gameObject.transform.position.z), Quaternion.Euler(new Vector3(0,0,spawnRotate)));
         }
-
+    }
+    private void SpawnRocket()
+    {
+        GameObject obj = Instantiate(abilityProjectiles[1],new Vector3(transform.position.x, transform.position.y+1), Quaternion.identity);
+        obj.GetComponent<Rocket>().blastRange = 1.5f * UpgradeIndex;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
