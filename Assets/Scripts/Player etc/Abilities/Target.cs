@@ -10,6 +10,10 @@ public class Target : MonoBehaviour
     private GameObject target;
     public float upgradeIndex;
 
+    private void Awake()
+    {
+        Destroy(gameObject, 5 * upgradeIndex);
+    }
     private void findNearestEnemy()
     {
         enemieScripts = FindObjectsOfType<GeneralEnemyScript>();

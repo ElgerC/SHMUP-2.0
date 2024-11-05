@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -27,9 +28,9 @@ public class PlayerScript : MonoBehaviour
 
     //Health variables
     [SerializeField] float health;
-    [SerializeField] bool CanGetHit = true;
+    bool CanGetHit = true;
     [SerializeField] float hitImunityDur;
-    [SerializeField] private bool ShieldActive = false;
+    private bool ShieldActive = false;
 
     //Upgrade varaibles
     [SerializeField] private int UpgradeIndex = 1;
@@ -42,6 +43,9 @@ public class PlayerScript : MonoBehaviour
     //Abilities variables
     [SerializeField] private List<GameObject> abilityProjectiles = new List<GameObject>();
     [SerializeField] private GameObject spawnPoint;
+    private float charge = 0;
+    private float maxCharge = 100;
+    [SerializeField] private Slider chargeSlider;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -54,6 +58,7 @@ public class PlayerScript : MonoBehaviour
         lineRen.enabled = false;
 
         animator = GetComponent<Animator>();
+        chargeSlider.maxValue = maxCharge;
     }
     private void Start()
     {
@@ -158,32 +163,33 @@ public class PlayerScript : MonoBehaviour
     {
         if (ctx.performed)
         {
-            switch (sceneManager.sceneObjSpriteIndex)
-            {
-                case 0:
-                    SpawnMulti(UpgradeIndex, abilityProjectiles[0]);
-                    break;
-                case 1:
-                    SpawnRocket();
-                    break;
-                case 2:
-                    SpawnTarget();
-                    break;
-            }
+            if (charge >= maxCharge)
+                switch (sceneManager.sceneObjSpriteIndex)
+                {
+                    case 0:
+                        SpawnMulti(UpgradeIndex, abilityProjectiles[0]);
+                        break;
+                    case 1:
+                        SpawnRocket();
+                        break;
+                    case 2:
+                        SpawnTarget();
+                        break;
+                }
         }
     }
-    private void SpawnMulti(float amount,GameObject obj)
+    private void SpawnMulti(float amount, GameObject obj)
     {
         for (int i = 0; i < amount; i++)
         {
             float spawnRotate = (-17.5f * (UpgradeIndex - 1)) + (35 * i);
             spawnPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, spawnRotate));
-            Instantiate(obj, new Vector3(gameObject.transform.position.x + (spawnPoint.transform.up.x*4), gameObject.transform.position.y + spawnPoint.transform.up.y,gameObject.transform.position.z), Quaternion.Euler(new Vector3(0,0,spawnRotate)));
+            Instantiate(obj, new Vector3(gameObject.transform.position.x + (spawnPoint.transform.up.x * 4), gameObject.transform.position.y + spawnPoint.transform.up.y, gameObject.transform.position.z), Quaternion.Euler(new Vector3(0, 0, spawnRotate)));
         }
     }
     private void SpawnRocket()
     {
-        GameObject obj = Instantiate(abilityProjectiles[1],new Vector3(transform.position.x, transform.position.y+1), Quaternion.identity);
+        GameObject obj = Instantiate(abilityProjectiles[1], new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
         obj.GetComponent<Rocket>().blastRange = 1.5f * UpgradeIndex;
     }
     private void SpawnTarget()
@@ -247,5 +253,14 @@ public class PlayerScript : MonoBehaviour
         autoFiring = false;
         animator.SetFloat("Speed", 1 * UpgradeIndex);
         spriteRenderer.sprite = playerSO.playerVersions[sceneManager.sceneObjSpriteIndex].versionSprites[UpgradeIndex - 1];
+    }
+    public void AddCharge(float amount,string identifier)
+    {
+        if (charge <= (maxCharge * 1.25))
+        {
+            charge += amount;
+            chargeSlider.value = charge;
+        }
+            
     }
 }

@@ -37,6 +37,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
     private List<GameObject> enemyDrops;
     [SerializeField] float dropChance;
     [SerializeField] protected int Value;
+    [SerializeField] protected string m_name;
+    private PlayerScript player;
 
     protected virtual void Awake()
     {
@@ -44,6 +46,8 @@ public abstract class GeneralEnemyScript : M_SceneObject
         animator = GetComponent<Animator>();
         curHealth = health;
         state = States.spawning;
+        player = FindObjectOfType<PlayerScript>();
+        m_name = gameObject.name;
     }
     public void Spawned()
     {
@@ -78,13 +82,10 @@ public abstract class GeneralEnemyScript : M_SceneObject
     protected virtual void Death()
     {
         WaveManager.instance.EnemyCountChange(-1);
-        if (Random.Range(100, 0) <= dropChance)
-        {
-            GameObject obj = enemyDrops[Random.Range(0, enemyDrops.Count)];
-            Instantiate(obj, transform.position, Quaternion.identity);
-        }
+        drop();
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + Value);
         Debug.Log(PlayerPrefs.GetInt("Score") + Value);
+        player.AddCharge(Value, m_name);
         state = States.dying;
         Destroy(gameObject);
     }
@@ -124,5 +125,13 @@ public abstract class GeneralEnemyScript : M_SceneObject
         animator.SetTrigger("DmgFlash");
         if (curHealth <= 0)
             Death();
+    }
+    protected void drop()
+    {
+        if (Random.Range(100, 0) <= dropChance)
+        {
+            GameObject obj = enemyDrops[Random.Range(0, enemyDrops.Count)];
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
     }
 }

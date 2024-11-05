@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickDelay: 0.05
   tickDistance: 0.01
+  value: 10
 --- !u!61 &6559612411312447073
 BoxCollider2D:
   m_ObjectHideFlags: 0
