@@ -11,7 +11,7 @@ public class UpgradeDrop : Drops
         PlayerScript playerScript = collision.GetComponent<PlayerScript>();
         playerScript.Upgrade();
         playerScript.ReasignSprite();
-        playerScript.AddCharge(value,gameObject.name);
+        playerScript.AddCharge(value,gameObject.tag);
         Destroy(gameObject);
     }
 }

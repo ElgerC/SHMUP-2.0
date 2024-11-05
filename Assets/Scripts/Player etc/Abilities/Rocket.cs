@@ -12,7 +12,6 @@ public class Rocket : ProjectileScript
         colliders = Physics2D.OverlapCircleAll(transform.position, blastRange,enemyLayer);
         for(int i = 0; i < colliders.Length; i++)
         {
-            Debug.Log(colliders[i].name);
             colliders[i].GetComponent<GeneralEnemyScript>().TakeDmg(1);
         }
         Destroy(gameObject);

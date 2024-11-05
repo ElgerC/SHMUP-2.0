@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582035c03aba5434c96541161af61eeb, type: 3}
   m_Name: BossDrops
   m_EditorClassIdentifier: 
-  Drops: []
+  Drops:
+  - {fileID: 967648508882249484, guid: 643334fd814bee34facbe91d2ab36188, type: 3}

@@ -163,7 +163,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (charge >= maxCharge)
+            if (charge >= 50)
+            {
                 switch (sceneManager.sceneObjSpriteIndex)
                 {
                     case 0:
@@ -176,6 +177,9 @@ public class PlayerScript : MonoBehaviour
                         SpawnTarget();
                         break;
                 }
+                charge -= 50;
+                chargeSlider.value = charge;
+            }                
         }
     }
     private void SpawnMulti(float amount, GameObject obj)
@@ -258,9 +262,22 @@ public class PlayerScript : MonoBehaviour
     {
         if (charge <= (maxCharge * 1.25))
         {
-            charge += amount;
+            if ((identifier == "Enemy1" | identifier == "Enemy2" | identifier == "Enemy3") && sceneManager.sceneObjSpriteIndex == 1)
+            {
+                charge += amount * 2;
+            }
+            else if (identifier == "Boss" && sceneManager.sceneObjSpriteIndex == 2)
+            {
+                charge += amount * 2;
+            }
+            else if (identifier == "Drop" && sceneManager.sceneObjSpriteIndex == 0)
+            {
+                charge += amount * 2;
+            } else
+                charge += amount;
             chargeSlider.value = charge;
         }
-            
+        
+
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4533481547214498685}
   m_Layer: 8
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,6 +86,7 @@ MonoBehaviour:
   EnemyDropsScriptObj: {fileID: 11400000, guid: 52285d9af12764e43a3918c2dfa7fc4e, type: 2}
   dropChance: 100
   Value: 10
+  m_name: 
   direction: {x: 1, y: 0, z: 0}
   StrtDirect: -1
   offset: 0.5

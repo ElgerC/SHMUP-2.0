@@ -47,7 +47,7 @@ public abstract class GeneralEnemyScript : M_SceneObject
         curHealth = health;
         state = States.spawning;
         player = FindObjectOfType<PlayerScript>();
-        m_name = gameObject.name;
+        m_name = gameObject.tag;
     }
     public void Spawned()
     {

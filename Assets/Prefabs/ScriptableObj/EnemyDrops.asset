@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Drops:
   - {fileID: 7531713358008961622, guid: 323fe1f75acadd44fa4fd05ca3f7491d, type: 3}
-  - {fileID: 967648508882249484, guid: 643334fd814bee34facbe91d2ab36188, type: 3}
