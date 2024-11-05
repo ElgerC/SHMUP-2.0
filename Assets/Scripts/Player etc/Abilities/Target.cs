@@ -8,6 +8,7 @@ public class Target : MonoBehaviour
 
     private Vector3 nearestPos;
     private GameObject target;
+    public float upgradeIndex;
 
     private void findNearestEnemy()
     {
@@ -25,16 +26,17 @@ public class Target : MonoBehaviour
                         target.GetComponent<GeneralEnemyScript>().dmgPercentage = 1;
                     healthTarget = enemieScripts[i].curHealth;
                     target = enemieScripts[i].gameObject;
-                    enemieScripts[i].dmgPercentage = 1.3f;
+                    enemieScripts[i].dmgPercentage = 1f + (0.1f*upgradeIndex);
                 }
             }
         }
 
     }
-    private void Update()
+    private void FixedUpdate()
     {
+        if (target == null)
         findNearestEnemy();
         if (target != null)
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 1);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 0.1f*upgradeIndex);
     }
 }

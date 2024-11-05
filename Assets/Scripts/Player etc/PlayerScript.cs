@@ -167,7 +167,7 @@ public class PlayerScript : MonoBehaviour
                     SpawnRocket();
                     break;
                 case 2:
-                    GameObject obj = Instantiate(abilityProjectiles[2], new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
+                    SpawnTarget();
                     break;
             }
         }
@@ -185,6 +185,11 @@ public class PlayerScript : MonoBehaviour
     {
         GameObject obj = Instantiate(abilityProjectiles[1],new Vector3(transform.position.x, transform.position.y+1), Quaternion.identity);
         obj.GetComponent<Rocket>().blastRange = 1.5f * UpgradeIndex;
+    }
+    private void SpawnTarget()
+    {
+        GameObject obj = Instantiate(abilityProjectiles[2], new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
+        obj.GetComponent<Target>().upgradeIndex = UpgradeIndex;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
