@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class M_SceneObject : MonoBehaviour
+public class M_SceneObject : MonoBehaviour
 {
     [SerializeField] protected sceneObjectScriptableObject sceneObjData;
     M_SceneManager sceneManager;
