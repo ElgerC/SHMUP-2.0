@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
     bool CanGetHit = true;
     [SerializeField] float hitImunityDur;
     private bool ShieldActive = false;
-    [SerializeField] private Slider healthSlider;
+    HealthUIManager healthUIManager;
 
     //Upgrade varaibles
     [SerializeField] private int UpgradeIndex = 1;
@@ -60,12 +60,12 @@ public class PlayerScript : MonoBehaviour
 
         animator = GetComponent<Animator>();
         chargeSlider.maxValue = maxCharge;
-        healthSlider.maxValue = health;
-        healthSlider.value = health;
+        healthUIManager = FindObjectOfType<HealthUIManager>();
     }
     private void Start()
     {
         ReasignSprite();
+        healthUIManager.ChangeUIHealth(health);
     }
     private void Update()
     {
@@ -247,7 +247,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Debug.Log("Player hit");
                 health -= 1;
-                healthSlider.value = health;
+                healthUIManager.ChangeUIHealth(health);
                 if (health <= 0)
                     SceneManager.LoadScene("EndScene");
                 StartCoroutine(Imunity(hitImunityDur));

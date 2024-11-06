@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3397856436128780850}
   - component: {fileID: 230455394170068710}
   - component: {fileID: 5891682742308979893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff6d908e3b070449ae58ca51810b2f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeIndex: 0
