@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private Waves[] waves;
 
-    public int curWaveC = 1;
+    public int curWaveC = -1;
     public int curRoundC = 1;
     private bool waveActive = false;
     public int enemyC;

@@ -84,7 +84,6 @@ public abstract class GeneralEnemyScript : M_SceneObject
         WaveManager.instance.EnemyCountChange(-1);
         drop();
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + Value);
-        Debug.Log(PlayerPrefs.GetInt("Score") + Value);
         player.AddCharge(Value, m_name);
         state = States.dying;
         Destroy(gameObject);

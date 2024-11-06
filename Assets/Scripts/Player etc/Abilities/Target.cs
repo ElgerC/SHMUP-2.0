@@ -10,9 +10,10 @@ public class Target : MonoBehaviour
     private GameObject target;
     public float upgradeIndex;
 
-    private void Awake()
+    private void Start()
     {
-        Destroy(gameObject, 5 * upgradeIndex);
+
+        Destroy(gameObject, 5*upgradeIndex);
     }
     private void findNearestEnemy()
     {

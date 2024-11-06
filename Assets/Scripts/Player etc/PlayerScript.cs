@@ -31,6 +31,7 @@ public class PlayerScript : MonoBehaviour
     bool CanGetHit = true;
     [SerializeField] float hitImunityDur;
     private bool ShieldActive = false;
+    [SerializeField] private Slider healthSlider;
 
     //Upgrade varaibles
     [SerializeField] private int UpgradeIndex = 1;
@@ -43,7 +44,7 @@ public class PlayerScript : MonoBehaviour
     //Abilities variables
     [SerializeField] private List<GameObject> abilityProjectiles = new List<GameObject>();
     [SerializeField] private GameObject spawnPoint;
-    private float charge = 0;
+    private float charge;
     private float maxCharge = 100;
     [SerializeField] private Slider chargeSlider;
     private void Awake()
@@ -59,6 +60,8 @@ public class PlayerScript : MonoBehaviour
 
         animator = GetComponent<Animator>();
         chargeSlider.maxValue = maxCharge;
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
     }
     private void Start()
     {
@@ -81,6 +84,7 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(_moveDirection.x * moveSpeed, 0);
     }
     //Shooting
+    #region
     public void Fire(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -105,7 +109,7 @@ public class PlayerScript : MonoBehaviour
                             }
                             else
                             {
-                                animator.SetTrigger("LaserFadeOut");
+                                animator.SetBool("LaserFadeOut", true);
                                 autoFiring = false;
                             }
 
@@ -135,6 +139,7 @@ public class PlayerScript : MonoBehaviour
     public void LaserFadeIn()
     {
         lineRen.enabled = true;
+        animator.SetBool("LaserFadeOut", false);
     }
     public void LaserFadeOut()
     {
@@ -159,6 +164,8 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+    #endregion
+    #region
     public void Ability(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -179,7 +186,7 @@ public class PlayerScript : MonoBehaviour
                 }
                 charge -= 50;
                 chargeSlider.value = charge;
-            }                
+            }
         }
     }
     private void SpawnMulti(float amount, GameObject obj)
@@ -201,6 +208,37 @@ public class PlayerScript : MonoBehaviour
         GameObject obj = Instantiate(abilityProjectiles[2], new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
         obj.GetComponent<Target>().upgradeIndex = UpgradeIndex;
     }
+    #endregion
+    public void Upgrade()
+    {
+        if (UpgradeIndex < 3)
+        {
+            UpgradeIndex++;
+        }
+        SpeedBoost(2);
+    }
+    public void ReasignSprite()
+    {
+        switch (sceneManager.sceneObjSpriteIndex)
+        {
+            case 0:
+                lineRen.enabled = false;
+                animator.SetBool("LaserFadeOut", true);
+                autoFiring = false;
+                break;
+            case 1:
+                lineRen.enabled = false;
+                animator.SetBool("LaserFadeOut", true);
+                break;
+            case 2:
+                animator.SetBool("LaserFadeOut", false);
+                animator.SetFloat("Speed", 1 * UpgradeIndex);
+                autoFiring = false;
+                break;
+        }
+        spriteRenderer.sprite = playerSO.playerVersions[sceneManager.sceneObjSpriteIndex].versionSprites[UpgradeIndex - 1];
+    }
+    #region
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Drop")
@@ -209,6 +247,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Debug.Log("Player hit");
                 health -= 1;
+                healthSlider.value = health;
                 if (health <= 0)
                     SceneManager.LoadScene("EndScene");
                 StartCoroutine(Imunity(hitImunityDur));
@@ -237,14 +276,6 @@ public class PlayerScript : MonoBehaviour
     {
         StartCoroutine(ShieldDur(time));
     }
-    public void Upgrade()
-    {
-        if (UpgradeIndex < 3)
-        {
-            UpgradeIndex++;
-        }
-        SpeedBoost(2);
-    }
     private IEnumerator SpeedBoost(float delay)
     {
         float pastSpeed = moveSpeed;
@@ -252,13 +283,8 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         moveSpeed = pastSpeed;
     }
-    public void ReasignSprite()
-    {
-        autoFiring = false;
-        animator.SetFloat("Speed", 1 * UpgradeIndex);
-        spriteRenderer.sprite = playerSO.playerVersions[sceneManager.sceneObjSpriteIndex].versionSprites[UpgradeIndex - 1];
-    }
-    public void AddCharge(float amount,string identifier)
+    #endregion 
+    public void AddCharge(float amount, string identifier)
     {
         if (charge <= (maxCharge * 1.25))
         {
@@ -273,11 +299,12 @@ public class PlayerScript : MonoBehaviour
             else if (identifier == "Drop" && sceneManager.sceneObjSpriteIndex == 0)
             {
                 charge += amount * 2;
-            } else
+            }
+            else
                 charge += amount;
             chargeSlider.value = charge;
         }
-        
+
 
     }
 }
