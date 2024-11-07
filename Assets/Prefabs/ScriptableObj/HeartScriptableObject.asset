@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edc5c7044a37964ead769f936f4d2c1, type: 3}
+  m_Name: HeartScriptableObject
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: fbe98a80a8f562943aed5a19696b9046, type: 3}
+  - {fileID: 21300000, guid: d62713d25e0d65c4b9f2acea9ccf9786, type: 3}
+  - {fileID: 21300000, guid: fe4ea8ebd585fbe48a58131f43eb6de0, type: 3}

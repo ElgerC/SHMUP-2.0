@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class M_SceneImage : MonoBehaviour
+public class M_SceneImage : M_SceneObject
 {
-    // Start is called before the first frame update
-    void Start()
+    private Image image;
+    protected override void Start()
     {
-        
+        image = GetComponent<Image>();
+        sceneManager = M_SceneManager.instance;
+        sceneManager.sceneObjects.Add(gameObject);
+
+        ReasignSprite();
+    }
+    public override void ReasignSprite()
+    {
+        image.sprite = sceneObjData.sprites[sceneManager.sceneObjSpriteIndex];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class M_SceneObject : MonoBehaviour
 {
     [SerializeField] protected sceneObjectScriptableObject sceneObjData;
-    M_SceneManager sceneManager;
+    protected M_SceneManager sceneManager;
     SpriteRenderer spriteRenderer;
     protected virtual void Start()
     {
@@ -19,7 +19,7 @@ public class M_SceneObject : MonoBehaviour
 
         ReasignSprite();
     }
-    public void ReasignSprite()
+    public virtual void ReasignSprite()
     {
         spriteRenderer.sprite = sceneObjData.sprites[sceneManager.sceneObjSpriteIndex];        
     }
