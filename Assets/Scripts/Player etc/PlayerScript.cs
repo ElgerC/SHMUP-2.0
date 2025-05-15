@@ -183,7 +183,7 @@ public class PlayerScript : MonoBehaviour
     //Do ability based on version linked E 
     public void Ability(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && charge >= 50)
+        if (ctx.performed && charge >= 25)
         {
             switch (sceneManager.sceneObjSpriteIndex)
             {
@@ -197,7 +197,7 @@ public class PlayerScript : MonoBehaviour
                     SpawnTarget();
                     break;
             }
-            charge -= 50;
+            charge -= 25;
             chargeSlider.value = charge;
 
         }
